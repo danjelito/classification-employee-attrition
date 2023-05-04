@@ -123,7 +123,7 @@ if __name__ == '__main__':
     for model in [
         'logres', 
         'sgd', 
-        # 'xgb'
+        'xgb'
     ]:
         
         # print model name and separator
