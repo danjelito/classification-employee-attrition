@@ -1,18 +1,17 @@
 import pandas as pd
 
-from sklearn.model_selection import cross_validate
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer, KNNImputer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
-from sklearn.model_selection import cross_validate, StratifiedKFold, RandomizedSearchCV
+from sklearn.model_selection import StratifiedKFold, GridSearchCV
 
 import config
 import module
 import model_dispatcher
 
 
-def run_randomized_search(model, data, n_iter):
+def run_randomized_search(model, data):
 
     # clean df
     unused= [
@@ -86,13 +85,12 @@ def run_randomized_search(model, data, n_iter):
     # initialize stratified kfold
     fold= StratifiedKFold(n_splits= 3, shuffle= True, random_state= config.RANDOM_STATE)
 
-    # initialize randomized sarch cv
-    search= RandomizedSearchCV(
+    # initialize grid search cv
+    search= GridSearchCV(
         estimator= pipeline, 
         # get param distribution from model_dispatcher
         # according to model
-        param_distributions= model_dispatcher.params[model], 
-        n_iter= n_iter, 
+        param_grid= model_dispatcher.params[model], 
         scoring= 'f1', 
         n_jobs= -1, 
         cv= fold, 
@@ -103,7 +101,6 @@ def run_randomized_search(model, data, n_iter):
     search.fit(
         X= data.drop(columns= label),
         y= data[label].values.ravel(),
-        # random_state= config.RANDOM_STATE,  
     )
 
     # get best estimator, param and score
@@ -133,5 +130,4 @@ if __name__ == '__main__':
         run_randomized_search(
             model= model, 
             data= df_train,
-            n_iter= 2,
         )
