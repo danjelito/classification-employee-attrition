@@ -120,7 +120,11 @@ if __name__ == '__main__':
     # so that we only need to lead data once for all models    
     df_train= pd.read_csv(config.TRAIN_SET)
     
-    for model in ['logres', 'sgd', 'xgb']:
+    for model in [
+        'logres', 
+        'sgd', 
+        # 'xgb'
+    ]:
         
         # print model name and separator
         print(f'\n{"".join(["-"] * 50)}')
