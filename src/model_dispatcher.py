@@ -23,6 +23,8 @@ models = {
     "dt": DecisionTreeClassifier(),
     "gp": GaussianProcessClassifier(),
     "rf": RandomForestClassifier(),
+    "ada": AdaBoostClassifier(),
+    "gb": GradientBoostingClassifier(),
     "xgb": XGBClassifier(),
     "lgb": LGBMClassifier(),
 
