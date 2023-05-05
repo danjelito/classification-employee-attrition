@@ -146,15 +146,18 @@ def optimize(
 
 if __name__ == '__main__':
 
-    from sklearn.linear_model import LogisticRegression
+    # ignore user warning
+    import warnings
+    with warnings.catch_warnings():
+        warnings.filterwarnings("ignore", category= UserWarning)
 
-    for model in [
-        'logres', 
-        'sgd', 
-        'xgb'
-    ]:
-        
-        optimize(
-            model= model,
-            n_calls= 200,
-        )
+        for model in [
+            'logres', 
+            'sgd', 
+            'xgb'
+        ]:
+            
+            optimize(
+                model= model,
+                n_calls= 200,
+            )
