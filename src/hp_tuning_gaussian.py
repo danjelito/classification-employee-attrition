@@ -21,6 +21,18 @@ def run_cv(
     param_names: list,
     data: pd.DataFrame
 ):
+    """
+    Cross validation with the given model, parameters and dataset
+
+    Args:
+        params (list): model parameters
+        model (str): model to use, taken from model_dispatcher
+        param_names (list): name of the model parameters
+        data (pd.DataFrame): the dataset consisting of X and y
+
+    Returns:
+        int: negative mean f1 score across the folds
+    """
     
     # convert params to dictionary 
     params= dict(zip(param_names, params))
@@ -84,7 +96,7 @@ def run_cv(
     ])
 
     # create predition pipeline
-    # we set the parameter to accept **params
+    # we reset the model args to use **params
     prediction= Pipeline([
         ('model', model.set_params(**params))
     ])
@@ -111,9 +123,18 @@ def run_cv(
     return np.mean(f1_scores) * -1 
 
 def optimize(
-    model, 
-    n_calls 
+    model: str, 
+    n_calls: int 
 ):
+    """
+    Use gp_minimize to minimize loss function
+    given by function run_cv
+
+    Args:
+        model (str): model to use, taken from model_dispatcher
+        n_calls (int): number of iterations
+    """
+    
     df_train= pd.read_csv(config.TRAIN_SET)
 
     # create a partial function
@@ -159,5 +180,5 @@ if __name__ == '__main__':
             
             optimize(
                 model= model,
-                n_calls= 200,
+                n_calls= 100,
             )
