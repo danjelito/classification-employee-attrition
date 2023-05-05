@@ -56,9 +56,30 @@ models = {
     }),
 
     # # tuned model by bayesian optimization
-    # "logres_tuned_grid": LogisticRegression(),
-    # "sgd_tuned_grid": SGDClassifier(),
-    # "xgb_tuned_grid": XGBClassifier(),
+    "logres_tuned_bayes": LogisticRegression(**{
+        'penalty': 'l2', 
+        'C': 0.0014295171076570674, 
+        'max_iter': 1000, 
+        'solver': 'liblinear'
+    }),
+    "sgd_tuned_bayes": SGDClassifier(**{
+        'penalty': 'elasticnet', 
+        'alpha': 0.00016380341478793747, 
+        'max_iter': 1000, 
+        'early_stopping': True, 
+        'learning_rate': 'invscaling', 
+        'eta0': 1.0255201315268034
+    }),
+    "xgb_tuned_bayes": XGBClassifier(**{
+        'max_depth': 2, 
+        'min_child_weight': 0, 
+        'gamma': 0, 
+        'max_delta_step': 0, 
+        'n_estimators': 237, 
+        'lambda': 10, 
+        'alpha': 0, 
+        'tree_method': 'hist'
+    }),
 }
 
 # params per model for grid search and randomized search
