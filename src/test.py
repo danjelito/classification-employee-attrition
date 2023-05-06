@@ -96,7 +96,7 @@ def run_test(model, data_train, data_test):
     # predict
     y_pred= pipeline.predict(X_test)
 
-    return y_test, y_pred
+    return pipeline, y_test, y_pred
 
 
 if __name__ == '__main__':
@@ -115,13 +115,14 @@ if __name__ == '__main__':
         'logres_tuned_bayes',
         'logres_tuned_random',
         'sgd_tuned_bayes',
+        'xgb_tuned_bayes',
     ]
 
     # loop through all models
     for model in models:
         
         # run test  
-        y_test, y_pred= run_test(
+        clf, y_test, y_pred= run_test(
             model= model, 
             data_train= df_train, 
             data_test= df_test
@@ -140,7 +141,7 @@ if __name__ == '__main__':
         # save model
         filename= f'{model}.sav'
         filepath= config.MODEL_DIR / filename 
-        joblib.dump(model, filepath)
+        joblib.dump(clf, filepath)
 
     # concat all dfs in results
     result_df = pd.DataFrame(
@@ -150,7 +151,7 @@ if __name__ == '__main__':
     ).transpose()
 
     # save the result to output
-    result_df.to_csv(config.TEST_RESULT, index= False)
+    result_df.to_csv(config.TEST_RESULT, index= True)
 
     # print result
     print(result_df)
