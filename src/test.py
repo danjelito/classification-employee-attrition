@@ -154,5 +154,12 @@ if __name__ == '__main__':
     # save the result to output
     result_df.to_csv(config.TEST_RESULT, index= True)
 
+    # save y_pred and y_test
+    import pickle
+    # list of lists containing model, y_test and y_pred
+    pred= [models, y_tests, y_preds]
+    with open(config.TEST_PRED, 'wb') as f:
+        pickle.dump(pred, f)
+
     # print result
     print(result_df)
