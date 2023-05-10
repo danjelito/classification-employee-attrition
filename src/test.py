@@ -114,7 +114,8 @@ if __name__ == '__main__':
     models= [
         'logres_tuned_bayes',
         'logres_tuned_random',
-        'sgd_tuned_bayes',
+        'ada_tuned_bayes',
+        'sgd_tuned_random',
         'xgb_tuned_bayes',
     ]
 

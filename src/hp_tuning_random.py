@@ -135,5 +135,5 @@ if __name__ == '__main__':
         run_randomized_search(
             model= model, 
             data= df_train,
-            n_iter= 200,
+            n_iter= 500,
         )

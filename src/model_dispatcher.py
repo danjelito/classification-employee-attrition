@@ -35,7 +35,7 @@ models = {
         'solver': 'liblinear', 
         'penalty': 'l2', 
         'max_iter': 1000, 
-        'C': 0.0014
+        'C': 0.0034
     }),
     "sgd_tuned_random": SGDClassifier(**{
         'penalty': 'l2', 
@@ -54,21 +54,26 @@ models = {
         'lambda': 0.889, 
         'gamma': 0, 'prediction__model__alpha': 0.0
     }),
+    "ada_tuned_random": AdaBoostClassifier(**{
+        'n_estimators': 155, 
+        'algorithm': 'SAMME.R', 
+        'learning_rate': 0.9326033468832199, 
+    }),
 
     # # tuned model by bayesian optimization
     "logres_tuned_bayes": LogisticRegression(**{
-        'penalty': 'l2', 
-        'C': 0.0014295171076570674, 
-        'max_iter': 1000, 
+        'penalty': 'l2',
+        'C': 0.0014295171076570674,
+        'max_iter': 1000,
         'solver': 'liblinear'
     }),
     "sgd_tuned_bayes": SGDClassifier(**{
-        'penalty': 'elasticnet', 
-        'alpha': 0.00016380341478793747, 
-        'max_iter': 1000, 
-        'early_stopping': True, 
-        'learning_rate': 'invscaling', 
-        'eta0': 1.0255201315268034
+        'penalty': 'l2',
+        'alpha': 1e-05,
+        'max_iter': 1000,
+        'early_stopping': True,
+        'learning_rate': 'invscaling',
+        'eta0': 0.42752361139140765
     }),
     "xgb_tuned_bayes": XGBClassifier(**{
         'max_depth': 2, 
@@ -79,6 +84,11 @@ models = {
         'lambda': 10, 
         'alpha': 0, 
         'tree_method': 'hist'
+    }),
+    "ada_tuned_bayes": AdaBoostClassifier(**{
+        'n_estimators': 200,    
+        'learning_rate': 1.4727747638770516,   
+        'algorithm': 'SAMME'
     }),
 }
 
@@ -204,5 +214,11 @@ param_names = {
         'alpha',
         'tree_method',
     ],
+
+    'ada': [
+        'n_estimators', 
+        'learning_rate', 
+        'algorithm',        
+    ]
 
 }

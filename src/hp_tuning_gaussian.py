@@ -174,8 +174,8 @@ if __name__ == '__main__':
 
         for model in [
             'logres', 
-            'sgd', 
-            'xgb'
+            'ada', 
+            'sgd'
         ]:
             
             optimize(
