@@ -123,8 +123,8 @@ if __name__ == '__main__':
     
     for model in [
         'logres', 
+        'ada',
         'sgd', 
-        'xgb'
     ]:
         
         # print model name and separator
@@ -135,5 +135,5 @@ if __name__ == '__main__':
         run_randomized_search(
             model= model, 
             data= df_train,
-            n_iter= 2_000,
+            n_iter= 200,
         )

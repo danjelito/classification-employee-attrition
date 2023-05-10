@@ -130,6 +130,12 @@ params = {
         'prediction__model__lambda': np.linspace(0, 2, 10),
         'prediction__model__alpha': np.linspace(0, 2, 10),
     },
+
+    'ada': {
+        'prediction__model__n_estimators': range(5, 200, 5),
+        'prediction__model__learning_rate': np.logspace(-5, 1, 100),
+        'prediction__model__algorithm': ['SAMME', 'SAMME.R'],
+    },
 }
 
 #param spaces and names for bayesian optimization
@@ -160,6 +166,12 @@ param_spaces = {
         space.Integer(0, 10, name= 'lambda'),
         space.Integer(0, 10, name= 'alpha'),
         space.Categorical(['approx', 'hist', 'auto', 'exact'], name= 'tree_method'), 
+    ],
+
+    'ada': [
+        space.Integer(5, 200, name= 'n_estimators'),
+        space.Real(0.000001, 10, prior= 'log-uniform', name= 'learning_rate'),
+        space.Categorical(['SAMME', 'SAMME.R']),
     ],
 
 }
