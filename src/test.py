@@ -15,42 +15,20 @@ import model_dispatcher
 def run_test(model, data_train, data_test):
 
     # clean df
-    unused= [
-        'EmployeeCount',
-        'EmployeeNumber',
-        'StandardHours', 
-        'Over18',
-    ]
-    data_train= module.clean_df(data_train, unused)
-    data_test= module.clean_df(data_test, unused)
+    unused= module.unused
+    data= module.clean_df(data, unused)
 
     # label
-    label= ['Attrition']
+    label= module.label
 
     # categorical features
-    cat= [
-        'BusinessTravel',
-        'Department',
-        'EducationField',
-        'Gender',
-        'JobRole',
-        'MaritalStatus',
-        'OverTime',
-    ]
+    cat= module.cat
 
     # numerical features that are long tailed
-    num_root= [
-        'DistanceFromHome',
-        'MonthlyIncome',
-        'NumCompaniesWorked',
-        'PercentSalaryHike',
-        'TotalWorkingYears',
-        'YearsAtCompany',
-        'YearsSinceLastPromotion',
-    ]
+    num_root= module.num_root
 
     # numerical features
-    num= [col for col in data_train.columns if col not in label + cat + num_root]
+    num= module.num
 
     # create preprocessing pipeline
     cat_pipe= Pipeline([
