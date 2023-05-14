@@ -11,7 +11,7 @@ import module
 import model_dispatcher
 
 
-def run_randomized_search(model, data):
+def run_grid_search(model, data):
 
     # clean df
     unused= module.unused
@@ -110,7 +110,7 @@ if __name__ == '__main__':
         print(f'{type(model_dispatcher.models[model]).__name__}')
         
         # run search 
-        run_randomized_search(
+        run_grid_search(
             model= model, 
             data= df_train,
         )
