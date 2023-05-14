@@ -52,7 +52,8 @@ models = {
         'max_depth': 1, 
         'max_delta_step': 2, 
         'lambda': 0.889, 
-        'gamma': 0, 'prediction__model__alpha': 0.0
+        'gamma': 0, 
+        # 'prediction__model__alpha': 0.0
     }),
     "ada_tuned_random": AdaBoostClassifier(**{
         'n_estimators': 155, 
