@@ -10,6 +10,6 @@ TEST_SET= PARENT_DIR / 'output/test.csv'
 TRAIN_RESULT= PARENT_DIR / 'output/train_result.csv'
 TEST_RESULT= PARENT_DIR / 'output/test_result.csv'
 
-TEST_PRED= PARENT_DIR / 'output/test_pred'
+TEST_PRED= PARENT_DIR / 'output/test_pred.pkl'
 
 MODEL_DIR= PARENT_DIR / 'model'

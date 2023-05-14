@@ -1,4 +1,5 @@
 import pandas as pd
+import os
 
 from sklearn.model_selection import cross_validate
 from sklearn.pipeline import Pipeline
@@ -111,6 +112,10 @@ if __name__ == '__main__':
 
     # concat all dfs in results
     result_df = pd.concat(results)
+
+    # delete previous test result file if already exist
+    if os.path.exists(config.TRAIN_RESULT):
+        os.remove(config.TRAIN_RESULT)
 
     # save the result to output
     result_df.to_csv(config.TRAIN_RESULT, index= False)
