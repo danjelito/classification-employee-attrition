@@ -1,5 +1,7 @@
 import pandas as pd
 import joblib
+import os
+import pickle
 
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer, KNNImputer
@@ -16,7 +18,8 @@ def run_test(model, data_train, data_test):
 
     # clean df
     unused= module.unused
-    data= module.clean_df(data, unused)
+    data_train= module.clean_df(data_train, unused)
+    data_test= module.clean_df(data_test, unused)
 
     # label
     label= module.label
@@ -129,13 +132,17 @@ if __name__ == '__main__':
         index= ['test_accuracy', 'test_f1']
     ).transpose()
 
+    # delete previous test result file if already exist
+    if os.path.exists(config.TEST_RESULT):
+        os.remove(config.TEST_RESULT)
+
     # save the result to output
     result_df.to_csv(config.TEST_RESULT, index= True)
 
-    # save y_pred and y_test
-    import pickle
     # list of lists containing model, y_test and y_pred
     pred= [models, y_tests, y_preds]
+
+    # save y_pred and y_test
     with open(config.TEST_PRED, 'wb') as f:
         pickle.dump(pred, f)
 
